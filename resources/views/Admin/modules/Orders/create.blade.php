@@ -19,9 +19,10 @@
                             <div class="mb-4">
                                 <label for="exampleFormControlSelect1" class="form-label">Select Status</label>
                                 <select class="form-select" id="exampleFormControlSelect1" name="status" aria-label="Default select example">
-                                    <option value="1">pendding</option>
-                                    <option value="2">completed</option>
-                                    <option value="3">canceled</option>
+                                    <option value="">select Status</option>
+                                    <option value="1">Pendding</option>
+                                    <option value="2">Completed</option>
+                                    <option value="3">Canceled</option>
                                 </select>
                             </div>
                         </div>

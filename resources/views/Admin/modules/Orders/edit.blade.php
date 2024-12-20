@@ -12,7 +12,7 @@
                         <div class="col-md-6">
                             <div class="mb-4">
                                 <label for="total_price" class="form-label">Total Price</label>
-                                <input type="text" class="form-control" name="total_price" id="total_price" placeholder="Enter category name" />
+                                <input type="text" class="form-control" name="total_price" id="total_price" value="{{$order->total_price}}" placeholder="Enter category name" />
                             </div>
                         </div>
     
@@ -20,16 +20,17 @@
                             <div class="mb-4">
                                 <label for="exampleFormControlSelect1" class="form-label">Select Status</label>
                                 <select class="form-select" id="exampleFormControlSelect1" name="status" aria-label="Default select example">
-                                    <option value="1">pendding</option>
-                                    <option value="2">completed</option>
-                                    <option value="3">canceled</option>
+                                    <option value="">select Status</option>
+                                    <option value="1" {{$order->status == 'pendding' ? 'selected' : ''}}>Pendding</option>
+                                    <option value="2" {{$order->status == 'completed' ? 'selected' : ''}}>Completed</option>
+                                    <option value="3" {{$order->status == 'canceled' ? 'selected' : ''}}>Canceled</option>
                                 </select>
                             </div>
                         </div>
                        
                     </div> 
                     <button type="submit" title="Save"
-                        class="btn btn-primary me-4 waves-effect waves-light">Save
+                        class="btn btn-primary me-4 waves-effect waves-light">Update
                     </button>
                         
                     <button type="button" onclick="history.back()"

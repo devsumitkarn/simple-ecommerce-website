@@ -95,7 +95,7 @@
                         <h4 class="mb-1">Welcome to Admin! 👋</h4>
                         <p class="mb-6">Streamline Your Workflow—Admin Tools at Your Fingertips!</p>
 
-                        <form id="formAuthentication" class="mb-6" action="{{route('login')}}" method="POST">
+                        <form id="formAuthentication" class="mb-6" action="{{route('admin.login')}}" method="POST">
                             @csrf
                             <div class="mb-6">
                                 <label for="email" class="form-label">Email</label>

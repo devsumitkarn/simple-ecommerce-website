@@ -31,4 +31,6 @@ class HomeController extends Controller
 
         return response()->json(['success' => true, 'name' => $admin->name]);
     }
+
+    
 }

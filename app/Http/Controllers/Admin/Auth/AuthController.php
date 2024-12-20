@@ -19,17 +19,21 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
-        if(Auth::attempt($request->only('email', 'password','remember_token'))){
-            return redirect()->route('dashboard')->with('success', 'Login successful.');
+    
+        if (Auth::attempt($request->only('email', 'password'))) {
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.dashboard')->with('success', 'Login successful.');
+            }
+            Auth::logout();
+            return redirect()->route('admin.login.page')->withErrors(['email' => 'Access denied. Admins only.']);
         }
-
-        return redirect()->route('login.page')->withErrors(['email' => 'Invalid credentials. Please try again.']);
+    
+        return redirect()->route('admin.login.page')->withErrors(['email' => 'Invalid credentials. Please try again.']);
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login.page');
+        return redirect()->route('admin.login.page');
     }
 }

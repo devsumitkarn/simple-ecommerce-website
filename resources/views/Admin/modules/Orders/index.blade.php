@@ -60,7 +60,7 @@
                                         </a>
                                         <form action="{{route('admin.orders.destroy', $order->id)}}" method="POST">
                                             @csrf
-                                            @method('detete')
+                                            @method('delete')
                                             <button type="submit" class="dropdown-item"><i class="ti ti-trash me-1"></i>Delete</button>
                                         </form>
                                     </div>
