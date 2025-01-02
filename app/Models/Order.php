@@ -14,5 +14,16 @@ class Order extends Model
         'user_id',
         'total_price',
         'status',
+        'order_items_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function orderItems()
+    {
+        return $this->belongsTo(OrderItme::class);
+    }
 }

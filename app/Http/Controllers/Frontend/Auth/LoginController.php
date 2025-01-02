@@ -17,6 +17,12 @@ class LoginController extends Controller
 
     public function register(Request $request)
     {
+        $request->validate([
+            'name'      => 'required',
+            'email'     => 'required|email',
+            'password'  => 'required|confirmed',
+        ]);
+
         $data = $request->all();
         $data['role'] = 'user';
         if (isset($data['password'])) {
@@ -42,12 +48,12 @@ class LoginController extends Controller
             return redirect()->route('user.home')->with('success', 'Login successful.');
         }
 
-        return redirect()->route('user.login.page')->withErrors(['email' => 'Invalid credentials. Please try again.']);
+        return redirect()->route('login')->withErrors(['email' => 'Invalid credentials. Please try again.']);
     }
 
     public function logout()
     {
         Auth::logout();
-        return to_route('user.login.page');
+        return to_route('login');
     }
 }

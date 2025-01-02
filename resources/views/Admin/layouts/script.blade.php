@@ -40,4 +40,42 @@
     <script src="{{url('vuexy/assets/js/forms-selects.js')}}"></script>
     <script src="{{url('vuexy/assets/js/forms-tagify.js')}}"></script>
 
+    <script>
+        $('.datatable').DataTable({
+            dom: '<"d-flex justify-content-between align-items-center"lfB>rt<"bottom d-flex justify-content-between align-items-center"ip>',
+            buttons: 
+            [   
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fas fa-file-pdf"></i> Export to PDF',
+                    className: 'btn custom-btn-size btn-primary',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fas fa-file-excel"></i> Export to Excel',
+                    className: 'btn custom-btn-size btn-success ms-2',
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                }
+            ],
+            language: {
+                search: "",
+                searchPlaceholder: "Search records...",
+            },
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            pageLength: 10,
+            columnDefs: [{
+                orderable: false,
+                targets: -1
+            }]
+        });
+    </script>
+
     @yield('script')

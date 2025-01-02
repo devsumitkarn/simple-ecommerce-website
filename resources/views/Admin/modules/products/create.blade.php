@@ -12,7 +12,7 @@
         <div class="card">
             <h5 class="card-header">Add Products</h5>
             <div class="card-body">
-                <form action="{{route('admin.products.store')}}" method="POST">
+                <form action="{{route('admin.products.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
@@ -27,6 +27,14 @@
                                 <label for="price" class="form-label">Price</label>
                                 <input class="form-control" type="text" name="price" id="price"
                                     placeholder="Enter Product Price" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label for="discount" class="form-label">Discount</label>
+                                <input class="form-control" type="text" name="discount" id="discount"
+                                    placeholder="Enter Product discount" />
                             </div>
                         </div>
 
@@ -66,7 +74,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                          </div>
+                        </div>
 
                         {{-- <div class="card1">
                             <div class="col-md-12">

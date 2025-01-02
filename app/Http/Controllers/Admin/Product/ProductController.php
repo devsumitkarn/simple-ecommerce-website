@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -42,13 +43,19 @@ class ProductController extends Controller
         // ]);
     
         $product = new Product();
+        if ($request->hasFile('image')) {
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10000',
+            ]);
+
+            $imagePath = $request->file('image')->store('uploads/products', 'public');
+            $product->image = $imagePath;
+        }
         $product->name = $request->name;
         $product->price = $request->price;
+        $product->discount = $request->discount;
         $product->status = $request->status;
         $product->description = $request->description; 
-        if ($request->hasFile('image')) {
-            $product->image = $request->file('image')->store('storage/products', 'public');
-        }
         $product->category_id = $request->category_id;
         // dd($product);
         $product->save();
@@ -80,16 +87,26 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         // dd($request->all());
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'price' => 'required|numeric|min:0',
-        //     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        //     'status' => 'required|boolean',
-        //     'category_id' => 'required|exists:categories,id',
-        // ]);
+        $request->validate([
+            // 'name' => 'required|string|max:255',
+            // 'price' => 'required|numeric|min:0',
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'status' => 'required|boolean',
+            // 'category_id' => 'required|exists:categories,id',
+        ]);
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
     
+            // Store the new image
+            $imagePath = $request->file('image')->store('uploads/products', 'public');
+            $product->image = $imagePath;
+        }
         $product->name = $request->name;
         $product->price = $request->price;
+        $product->discount = $request->discount;
         $product->status = $request->status;
         $product->description = $request->description; 
         if ($request->hasFile('image')) {

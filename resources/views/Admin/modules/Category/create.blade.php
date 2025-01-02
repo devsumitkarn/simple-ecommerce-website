@@ -33,6 +33,17 @@
                             </div>
                         </div>
                        
+                        <div class="col-md-6 mb-6">
+                            <label for="select2Basic" class="form-label">Select Parent</label>
+                            <select id="select2Basic" class="select2 form-select form-select-lg" name="parent_id" data-allow-clear="true">
+                                <option value=""></option>
+                                @foreach($categorys as $category)
+                                    <option value="{{ $category->id }}">
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                         
                     </div> 
                     <button type="submit" title="Save"

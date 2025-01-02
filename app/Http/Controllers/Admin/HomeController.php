@@ -32,5 +32,8 @@ class HomeController extends Controller
         return response()->json(['success' => true, 'name' => $admin->name]);
     }
 
-    
+    public function landingPage()
+    {
+        return view('landing-page.home');
+    }
 }

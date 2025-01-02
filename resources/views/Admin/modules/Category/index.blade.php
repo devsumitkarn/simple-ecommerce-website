@@ -19,11 +19,12 @@
             </div>
         </div>
         <div class="table-responsive text-nowrap">
-            <table class="table">
+            <table class="table datatable">
                 <thead class="table-dark">
                     <tr>
-                        <th>{{ __('message.name')}}</th>
+                        <th>Category Name</th>
                         <th>Slug</th>
+                        <th>Parent</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -33,6 +34,7 @@
                         <tr>
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->slug }}</td>
+                            <td>{{ $category->parent->name ?? 'N/A'}}</td>
                             <td>
                                 <span
                                     class="badge 
@@ -55,16 +57,19 @@
                                         <i class="ti ti-dots-vertical"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('admin.categories.edit', $category->id) }}"><i
+                                        <a class="dropdown-item"
+                                            href="{{ route('admin.categories.edit', $category->id) }}"><i
                                                 class="ti ti-pencil me-1"></i>
                                             Edit
                                         </a>
-                                        <form action="{{route('admin.categories.destroy', $category->id)}}" method="POST">
+                                        <form action="{{ route('admin.categories.destroy', $category->id) }}"
+                                            method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="dropdown-item"><i class="ti ti-trash me-1"></i>Delete</button>
+                                            <button type="submit" class="dropdown-item"><i
+                                                    class="ti ti-trash me-1"></i>Delete</button>
                                         </form>
-                                        
+
                                     </div>
                                 </div>
                             </td>
@@ -77,4 +82,9 @@
             </table>
         </div>
     </div>
+@endsection
+@section('script')
+
+    
+
 @endsection

@@ -6,7 +6,7 @@
         <div class="card">
             <h5 class="card-header">Update Products</h5>
             <div class="card-body">
-                <form action="{{route('admin.products.update', $product->id)}}" method="POST">
+                <form action="{{route('admin.products.update', $product->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -34,6 +34,13 @@
                             <div class="mb-4">
                                 <label for="price" class="form-label">Price</label>
                                 <input class="form-control" type="text" name="price" id="price" value="{{$product->price}}" placeholder="Enter Product Price" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label for="discount" class="form-label">Discount</label>
+                                <input class="form-control" type="text" name="discount" id="discount" value="{{$product->discount}}" placeholder="Enter Product Price" />
                             </div>
                         </div>
 

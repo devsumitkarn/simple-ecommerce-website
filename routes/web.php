@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\Banner\BannerController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\Order\OrderController;
 use App\Http\Controllers\Admin\Product\ProductController;
@@ -23,10 +24,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
-    Route::get('/login/page', [AuthController::class, 'loginPage'])->name('login.page');
-    Route::post('/login', [AuthController::class, 'login'])->name('login');
-});
+Route::get('/', [HomeController::class, 'landingPage'])->name('landing.page');
+Route::post('/login', [AuthController::class, 'login'])->name('admin.login');
+Route::get('admin/login/page', [AuthController::class, 'loginPage'])->name('admin.login.page');
 Route::get('/switch-language/{locale}', [LanguageController::class, 'switchLanguage']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/categories', CategoryController::class);    
         Route::resource('/products', ProductController::class); 
         Route::resource('/orders', OrderController::class);
+        Route::resource('banners', BannerController::class);
     });
        
 });

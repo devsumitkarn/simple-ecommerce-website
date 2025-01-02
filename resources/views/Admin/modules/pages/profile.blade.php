@@ -80,7 +80,7 @@
                 console.log('here')
                 var name = $('#adminNameInput').val();
                 $.ajax({
-                    url: "{{ route('profile.update') }}",
+                    url: "{{ route('admin.profile.update') }}",
                     type: "POST",
                     data: {
                         _token: "{{ csrf_token() }}",

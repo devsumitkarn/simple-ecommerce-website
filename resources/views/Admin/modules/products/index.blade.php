@@ -19,24 +19,32 @@
             </div>
         </div>
         <div class="table-responsive text-nowrap">
-            <table class="table">
+            <table class="table datatable">
                 <thead class="table-dark">
                     <tr>
                         <th>Product Name</th>
                         <th>Category Name</th>
                         <th>Price</th>
+                        <th>Discount</th>
                         <th>Image</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @forelse ($products as $product)
+                    @foreach ($products as $product)
                         <tr>
                             <td>{{$product->name}}</td>
                             <td>{{$product->category->name}}</td>
                             <td>{{$product->price}}</td>
-                            <td>{{$product->image ?? "N/A"}}</td>
+                            <td>{{$product->discount}}%</td>
+                            <td>
+                                @if ($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="150">
+                                @else
+                                    <p>No Image</p>
+                                @endif
+                            </td>
                             <td>
                                 <span
                                     class="badge 
@@ -70,9 +78,9 @@
                                 </div>
                             </td>
                         </tr>
-                    @empty
-                        <p>NO PRODUCTS</p>
-                    @endforelse
+                    
+                        
+                    @endforeach
                     
                 </tbody>
             </table>

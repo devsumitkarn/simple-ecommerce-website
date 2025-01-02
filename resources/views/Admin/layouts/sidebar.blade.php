@@ -42,6 +42,14 @@
         </li>
         
         <li class="menu-item">
+            <a class="menu-link {{ Route::is('admin.banners.index', 'admin.banners.create', 'admin.banners.edit', 'admin.banners.show') ? 'active bg-gradient-primary' : '' }}"
+                href="{{ route('admin.banners.index') }}">
+                <i class="menu-icon fas fa-flag"></i>
+                <div>Banners</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
             <a class="menu-link {{ Route::is('admin.users.index', 'admin.users.create', 'admin.users.edit', 'admin.users.show') ? 'active bg-gradient-primary' : '' }}"
                 href="{{ route('admin.users.index') }}">
                 <i class="menu-icon fas fa-user"></i>

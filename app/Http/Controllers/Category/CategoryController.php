@@ -13,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categorys = Category::orderBy('id', 'desc')->get();
+        $categorys = Category::with('children')->orderBy('id', 'desc')->get();
         return view('Admin.modules.Category.index', compact('categorys'));
     }
 
@@ -22,7 +22,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('Admin.modules.Category.create');
+        $categorys = Category::with('children')->get();
+        return view('Admin.modules.Category.create', compact('categorys'));
     }
 
     /**
